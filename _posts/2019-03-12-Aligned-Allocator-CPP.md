@@ -33,9 +33,12 @@ and plus 1. `padT` will always move the pointer to the next slot that can be dev
 `(T*)(( ((__intptr_t)(ptr+padT)) >> b) << b)` is very confusing at first, but when you look into the core part: `>> b) << b`  
 which is simply doing one thing: alignment:  
 
-`(15 >> 4) << 4 = 0 (01111)`  
-`(16 >> 4) << 4 = 16(10000)`  
-`(19 >> 4) << 4 = 16(10011 -> 10000)`  
+```sh
+(15 >> 4) << 4 = 0 (01111) 
+(16 >> 4) << 4 = 16(10000)  
+(19 >> 4) << 4 = 16(10011 -> 10000)
+```
+
 What's your observation?  
 Anything that `mode 16 != 0` will be set as 0.
 
