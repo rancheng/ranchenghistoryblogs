@@ -1,6 +1,8 @@
 ---
-published: true
+layout: post
+title: Docker Practice Notes
 ---
+
 ### Delete Docker images:
 
 ---
