@@ -2,10 +2,10 @@
 layout: post
 title: Docker Practice Notes
 ---
+This post is about: How to remove docker images, run docker images and compose docker-compose file.
 
 ### Delete Docker images:
 
----
 
 To delete all containers including its volumes use,
 
@@ -23,7 +23,6 @@ docker rmi -f $(docker images -a -q)
 
 Remember, you should remove all the containers before removing all the images from which those containers were created.
 
----
 
 
 #### get into docker bash:
