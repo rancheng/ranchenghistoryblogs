@@ -1,7 +1,7 @@
-----
+---
 layout: post
 title: Towards Deep Learning augumented Visual Odometry
-----
+---
 
 Visual SLAM is already a well defined problem and has been largely explored. Many powerful algorithms use traditional geometrical
 methods can achieve very high precision yet keep a reasonable speed. However, there's still some corner left to explore...
