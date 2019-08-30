@@ -14,7 +14,7 @@ Before that, I obtained B.S. in Tongji University, 2015, I joined iLab Tongji(20
 
 ### More Information
 
-A place to include any other types of information that you'd like to include about yourself.
+You can find my personal CV here: [cv]({{ site.baseurl }}/docs/Ran_Cheng_CV_research_2018.pdf "cv")
 
 ### Contact me
 
