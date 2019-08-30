@@ -3,7 +3,7 @@ layout: page
 title: About
 permalink: /about/
 ---
-
+![profile]({{ site.baseurl }}/images/profile_thumb.jpg "profile")
 I'm a robotics researcher, with experience on visual odometry, 3D reconstruction and deep learning.
 
 Currently working at Center for Intelligent Machines, McGill University, as CS M.S. candidate & Research Assistant of Prof. Gregory Dudek, looking for Ph.D in Robotics, Vision, and Learning.
