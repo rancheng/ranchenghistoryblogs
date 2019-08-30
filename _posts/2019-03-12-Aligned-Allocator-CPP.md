@@ -21,15 +21,18 @@ T* allocAligned(int size, std::vector<T*> &rawPtrVec)
 }
 ```
 
-Don't worry, I'll explain line by line:  
-`1 << b` in Line: `padT = 1 + ((1 << b)/sizeof(T))`  
+Don't worry, I'll explain line by line: 
+
+`1 << b` in Line: `padT = 1 + ((1 << b)/sizeof(T))` 
+
 is simply left shift b bits in the memory slot, which is equivalent to multiply $$2^b$$ by shifting left b bits in memory, 
 and plus 1. `padT` will always move the pointer to the next slot that can be devisible by 4.
 
 `new T[size + padT]` allocates the required size of memory plus the padding for alignment.
 
-`(T*)(( ((__intptr_t)(ptr+padT)) >> b) << b)` is very confusing at first, but when you look into the core part: ` >> b) << b`  
+`(T*)(( ((__intptr_t)(ptr+padT)) >> b) << b)` is very confusing at first, but when you look into the core part: `>> b) << b`  
 which is simply doing one thing: alignment:  
+
 `(15 >> 4) << 4 = 0 (01111)`  
 `(16 >> 4) << 4 = 16(10000)`  
 `(19 >> 4) << 4 = 16(10011 -> 10000)`  
