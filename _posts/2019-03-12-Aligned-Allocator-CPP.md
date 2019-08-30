@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Observations on Aligned Allocator
+title: CPP Aligned Allocator for SSE
 ---
 
 Allocators will normally span out a whole chunk of memory that's immediately available in heap, yet if you want to apply Intel SSE
