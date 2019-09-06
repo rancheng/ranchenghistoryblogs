@@ -1,5 +1,5 @@
 ---
-published: true
+title: old thoughts
 layout: post
 ---
 The match happened in one shot, which means the network in brain is a broadcast way, input was broadcasting towards each corner, and bouncing inside brain, eventually, those matched pattern will retain a high gain and activate the path.
