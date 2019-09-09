@@ -1,5 +1,4 @@
 ---
-published: false
 layout: post
 title: github http pull password free bashscript
 ---
