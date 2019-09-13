@@ -29,6 +29,17 @@ Let's regard neural network a function approximator which are built from the err
 
 Okay, now think about what will happen if all values of w are getting towards zeros, weights of connections are getting closed, that means that everything are forgetting, if \(w = 0\) that means everything is direct copy. But now you want to learn the limited parameter from infinite number of samples in real life and most of those samples are actually ambiguious and repeated, what will you do?
 
-For what I can think about now is that 
+For what I can think about now is that through the course of learning, the learner (weights) are very flexible, but after a time of training, the learner will consolidate at least part of it's parameters to the converged local minimals, and perhaps eventually stayed at that local minimal.
+
+I used to think that forgetting is to nudging all weight towards 0. But truth is not that case, at least not for now. High error gradients propagating back means that the weights are having a very high change of making errors, thus requires a very large step towards gradient direction, this is normally called forget, you forget means you are more versatile and flexible towards learning new stuff, right?
+
+Now with that idea, we can further explore it to this concept:
+
+ - high error \(\rightarrow\) trigger forgetting
+ - low error \(\rightarrow\) trigger remebering
+
+And if this process is constantly augmented through time, we can now define our final equation of function \(\pi\):
+
+$$ \pi(t, l, \Delta w) = e^{- \frac{\beta(\Delta w) l}{t}}$$
 
 
