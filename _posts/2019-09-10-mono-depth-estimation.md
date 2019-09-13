@@ -1,5 +1,6 @@
 ---
-published: false
+layout: post
+title: monocular depth estimation reviews
 ---
 Several good papers about the monocular depth estimation.
 Supervised Depth Estimator:
