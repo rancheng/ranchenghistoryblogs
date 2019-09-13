@@ -4,7 +4,7 @@ title: forgetting model for MLP
 ---
 instead of linearly sum up the input (weighted) from previous layer, we can introduce a novel layer that act as a receptor of the input signals, and adjust them accordingly, that way, it's easier to secure each gradient's direction and thus relief the pain of optimization which normally blindly navigating in the non-convex manifold.
 
-![forgetting.png](forgetting.png)
+![forgetting.png]({{ site.baseurl }}/_posts/forgetting.png "forgetting")
 
 $$w = w + \frac{\partial E}{\partial w}$$
 
@@ -17,9 +17,9 @@ However this parameter manifold optimization has several fatal drawbacks:
  
 So, by observing all the drawbacks above, I introduced a forgetting model in the multi-proceptron layers systems.
 
-![forgetting2.png](forgetting2.png)
+![forgetting2.png]({{ site.baseurl }}/_posts/forgetting2.png "forgetting")
 
-Here function $\pi$ is the coefficient factor that controls update rate for $w$. Consider this learning system, which want to keep it's lowest energy and survive, they have to filter out those unrelated information and get the rewards to survive, similar to Reinforcement Learning hey? I learnt the trick from this community long time before until I understood the Q and policy update trick.
+Here function $$\pi$$ is the coefficient factor that controls update rate for $$w$$. Consider this learning system, which want to keep it's lowest energy and survive, they have to filter out those unrelated information and get the rewards to survive, similar to Reinforcement Learning hey? I learnt the trick from this community long time before until I understood the Q and policy update trick.
 
 How to design such a system that seeking for low energy? Well, I don't know yet, but still get some hints on it.
 
