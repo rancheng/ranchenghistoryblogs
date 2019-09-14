@@ -17,7 +17,26 @@ $$P' = Rp + t = [X, Y, Z']^T$$
 Here $$(R, t)$$ is the camera pose. And since $$R$$ is an antisymmetric matrix, it has the following shape:
 
 $$\begin{bmatrix} 
-a_1 & a_2 & a_3 \\ 
-b_1 & b_2 & b_3 \\ 
-c_1 & c_2 & c_3  
+0 & -a_1 & a_2 \\ 
+a_1 & 0 & -a_3 \\ 
+-a_2 & a_3 & 0  
 \end{bmatrix}$$
+
+You can see that there's only three variables in the matrix above, thus there's only 3 degree of freedom in rotation, and you
+only need to optimize 3 variables in your Gauss-Newton for rotation matrix estimation. This key idea then convert into another
+algebra called **lie algebra**, since lie algebra will take another post to introduce, here I'll just explain what it is used
+for: it's a group of matrice with customized operations on it. To be understandable, they are just compressing the $$R_{3x3}$$ and $$t_{3x1}$$ into a vector $$\xi_{1x6}$$. The formal definition is as following:
+
+$$
+\begin{cases}
+  \begin{align}
+    \xi &= \begin{bmatrix}
+           \rho \\
+           \phi \\
+         \end{bmatrix} \in R^6, \rho \in R^3, \phi \in SO(3), \xi\wedge &= \begin{bmatrix}
+                                                                             \phi\wedge \rho \\
+                                                                             0^T 0 \\
+                                                                           \end{bmatrix} \in R^{4x4}
+  \end{align}   
+\end{cases}
+$$
