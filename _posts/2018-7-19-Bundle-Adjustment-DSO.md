@@ -39,3 +39,48 @@ $$
                                                                            \end{bmatrix} \in R^{4x4}
   \end{align}   
 $$
+
+Here $$SO(3)$$ is the antisymmetric matrix above, the rotation matrix. $$\wedge$$ is the operator that convert a vector into antisymmetric matrix. $$\xi$$ is in $$R^{4x4}$$ means it's under homogeneous coordinate. The reason to extend the 3x3 matrix
+into 4x4 homogeneous coordinate is that by introducing a new dimension, we can easily write the **Transformation** linearly.
+
+Okay, enough background introducing. Let's go back to the projection model:
+
+$$
+P_c = [u_c,v v_c, 1]^T = [X'/Z', Y'/Z', 1]^T
+$$
+
+Equation above is just a normalization, and now we get:
+
+$$
+\begin{cases}
+  u_c' = u_c(1+k_1r_c^2 + k_2r^4_c)\\
+  v_c' = v_c(1 + k_1r_c^2 + k_2r_c^4)
+\end{cases}
+$$
+
+Here $$k$$ and $$r$$ are the camera skew model factors. This step calculate the rectified coordinate in camera.
+
+Finally, according to the intrinsic model, we can get the final pixel coordinate:
+
+$$
+\begin{case}
+ u_s = f_xu_c' + c_x
+ v_s = f_xv_c' + c_y
+\end{case}
+$$
+
+After projection, we can get the error from the observation points, their pixel coordinates are defined as $$z = [u_o, v_o]^T$$.
+Then error can be written as:
+
+$$
+e = z - h(\xi, p)
+$$
+
+Here h is the projection matrix, p is the 3d point (landmarker) in the world. By sum up all land marker in all time, we get a 
+cost function like this:
+
+$$
+\sum_t\sum_p{||e_{tp}||^2}
+$$
+
+Which is a least squred optimization problem now.
