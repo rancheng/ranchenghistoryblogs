@@ -90,7 +90,7 @@ operation rules.
 Here I'm going to give the results, according to perturbation lemma:
 
 $$
-\frac{\partial e}{\partial \delta \xi} = \frac{(\delta \xi \oplus \xi)\partial e}{\partial \delta \xi} = \frac{\partial e}{\partial P'} \frac{\partial P'}{\partial \xi}
+\frac{\partial e}{\partial \delta \xi} = \frac{(\delta \xi \oplus \xi)e}{\partial \delta \xi} = \frac{\partial e}{\partial P'} \frac{\partial P'}{\partial \xi}
 $$
 
 Here $$\delta \xi$$ is the small perturbation delta and this equation decomposed derivative of lie group into two parts: 
