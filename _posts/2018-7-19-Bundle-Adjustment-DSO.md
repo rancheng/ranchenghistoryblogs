@@ -90,6 +90,23 @@ operation rules.
 Here I'm going to give the results, according to perturbation lemma:
 
 $$
-\frac{\partial e}{\partial \Delta \xi} = \frac{\partial e}{\parial \Delta} = \frac{\partial e}{\partial P'} \frac{\partial P'}{\partial \xi}
+\frac{\partial e}{\partial \delta \xi} = \frac{(\delta \xi \oplus \xi)\partial e}{\parial \delta \xi} = \frac{\partial e}{\partial P'} \frac{\partial P'}{\partial \xi}
 $$
 
+Here $$\delta \xi$$ is the small perturbation delta and this equation decomposed derivative of lie group into two parts: 
+partial derivative to the 3d point and the partial derivative of the perturbation delta, since we know that:
+
+$$\frac{\partial e}{\partial P'} = begin{bmatrix} 
+\frac{f_x}{Z'} & 0 & -\frac{f_xX'}{{Z'}^2} \\ 
+0 & \frac{f_y}{Z'} & -\frac{f_yY'}{{Z'}^2} \\  
+\end{bmatrix}$$
+
+Now the second partial is:
+$$frac{\partial P'}{\partial \delta \xi} = \frac{\partial (Tp)}{\partial \delta \xi} = begin{bmatrix} 
+I & -P'^{\wedge} \\ 
+0 & 0 \\  
+\end{bmatrix}$$
+
+Note that the matrix above is a 4x4 matrix in homogeneous coordinate, and we only extract the first 3 rows:
+
+$$\frac{\partial P'}{\partial \delta\xi} = [I, -P'^{\wedge}]$$
