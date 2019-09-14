@@ -65,7 +65,7 @@ Gauss-Newton method to optimize it. The delta update is $$\Delta = [\xi, p]$$ wh
 function as the following equation:
 
 $$
-||e(x + \Delta x)||^2 = \sum_t\sum_p||e_{tp} + \frac{\partial e}{\partial \xi}\Delta xi + \frac{\partial e}{\partial p}\Delta p||^2
+||e(x + \Delta x)||^2 = \sum_t\sum_p||e_{tp} + \frac{\partial e}{\partial \xi}\Delta \xi + \frac{\partial e}{\partial p}\Delta p||^2
 $$
 
 How to solve the partial derivatives $$\frac{\partial e}{\partial \delta\xi}$$ and $$\frac{\partial e}{\partial p}$$ is now the key for use to find the update gradients, well for projection p, it's easy:
