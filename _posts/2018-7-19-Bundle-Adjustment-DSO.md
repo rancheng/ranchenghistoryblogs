@@ -51,7 +51,9 @@ $$
 
 Equation above is just a normalization, and now we get:
 
-$$h=(\xi, p)$$
+$$z = h(\xi, p) \\
+  e = z - h(\xi, p)
+$$
 
 Here $$h$$ is the projection matrix, $$p$$ is the 3d point (landmarker) in the world. By sum up all land marker in all time, we get a 
 cost function like this:
