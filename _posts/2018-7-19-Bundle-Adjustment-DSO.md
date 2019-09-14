@@ -67,13 +67,12 @@ $$
 ||e(x + \Deltax)||^2 = \sum_t\sum_p||e_{tp} + \frac{\partial e}{\partial \xi}\Delta xi + \frac{\partial e}{\partial \p}\Delta p||^2
 $$
 
-How to solve the partial derivatives $$\frac{\partial e}{\partial \delta\xi}$$ and $$\frac{\partial e}{\partial \p}$$ is now the key
-for use to find the update gradients, well for projection p, it's easy:
+How to solve the partial derivatives $$\frac{\partial e}{\partial \delta\xi}$$ and $$\frac{\partial e}{\partial \p}$$ is now the key for use to find the update gradients, well for projection p, it's easy:
 
 $$
 \frac{\partial e}{\partial \p} = \frac{partial e}{\partial P'} \frac{\partial P'}{\partial p} = \begin{bmatrix} 
-\frac{f_x}{Z'} & 0 & -\frac{f_xX'}{{Z'}^2} \\ 
-0 & \frac{f_y}{Z'} & -\frac{f_yY'}{{Z'}^2} \\  
+\frac{f_x}{Z'} & 0 & -\frac{f_xX'}{Z'^2} \\ 
+0 & \frac{f_y}{Z'} & -\frac{f_yY'}{Z'^2} \\  
 \end{bmatrix}R
 $$
 
@@ -97,8 +96,8 @@ Here $$\delta \xi$$ is the small perturbation delta and this equation decomposed
 partial derivative to the 3d point and the partial derivative of the perturbation delta, since we know that:
 
 $$\frac{\partial e}{\partial P'} = begin{bmatrix} 
-\frac{f_x}{Z'} & 0 & -\frac{f_xX'}{{Z'}^2} \\ 
-0 & \frac{f_y}{Z'} & -\frac{f_yY'}{{Z'}^2} \\  
+\frac{f_x}{Z'} & 0 & -\frac{f_xX'}{Z'^2} \\ 
+0 & \frac{f_y}{Z'} & -\frac{f_yY'}{Z'^2} \\  
 \end{bmatrix}$$
 
 Now the second partial is:
