@@ -28,15 +28,14 @@ algebra called **lie algebra**, since lie algebra will take another post to intr
 for: it's a group of matrice with customized operations on it. To be understandable, they are just compressing the $$R_{3x3}$$ and $$t_{3x1}$$ into a vector $$\xi_{1x6}$$. The formal definition is as following:
 
 $$
-\begin{cases}
+
   \begin{align}
     \xi &= \begin{bmatrix}
            \rho \\
            \phi \\
-         \end{bmatrix} \in R^6, \rho \in R^3, \phi \in SO(3), \xi\wedge &= \begin{bmatrix}
-                                                                             \phi\wedge \rho \\
+         \end{bmatrix} \in R^6, \rho \in R^3, \phi \in SO(3), \xi^{\wedge} = \begin{bmatrix}
+                                                                             \phi^{\wedge} \rho \\
                                                                              0^T 0 \\
                                                                            \end{bmatrix} \in R^{4x4}
   \end{align}   
-\end{cases}
 $$
