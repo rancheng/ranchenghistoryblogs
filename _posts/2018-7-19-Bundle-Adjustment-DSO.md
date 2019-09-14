@@ -104,10 +104,12 @@ $$\frac{\partial e}{\partial P'} = \begin{bmatrix}
 \end{bmatrix}$$
 
 Now the second partial is:
-$$frac{\partial P'}{\partial \delta \xi} = \frac{\partial (Tp)}{\partial \delta \xi} = \begin{bmatrix} 
+$$
+\frac{\partial P'}{\partial \delta \xi} = \frac{\partial (Tp)}{\partial \delta \xi} = \begin{bmatrix} 
 I & -P'^{\wedge} \\ 
 0 & 0 \\  
-\end{bmatrix}$$
+\end{bmatrix}
+$$
 
 Note that the matrix above is a 4x4 matrix in homogeneous coordinate, and we only extract the first 3 rows:
 
