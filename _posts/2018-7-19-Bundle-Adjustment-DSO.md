@@ -63,10 +63,10 @@ Here $$k$$ and $$r$$ are the camera skew model factors. This step calculate the 
 Finally, according to the intrinsic model, we can get the final pixel coordinate:
 
 $$
-\begin{case}
+\begin{cases}
  u_s = f_xu_c' + c_x
  v_s = f_xv_c' + c_y
-\end{case}
+\end{cases}
 $$
 
 After projection, we can get the error from the observation points, their pixel coordinates are defined as $$z = [u_o, v_o]^T$$.
