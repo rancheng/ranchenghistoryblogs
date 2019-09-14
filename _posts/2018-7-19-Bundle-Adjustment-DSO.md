@@ -63,6 +63,7 @@ $$
 Which is a least squred optimization problem now. Since observation function $$h(\xi, p)$$ is a non-linear function, we can use
 Gauss-Newton method to optimize it. The delta update is $$\Delta = [\xi, p]$$ which is a $$6+n$$ vector, 6 is the degree of freedom of camera pose, $$n$$ is the land mark point number. Accordingly, use taylor approximation, we can approximate the cost
 function as the following equation:
+
 $$
 ||e(x + \Delta x)||^2 = \sum_t\sum_p||e_{tp} + \frac{\partial e}{\partial \xi}\Delta xi + \frac{\partial e}{\partial p}\Delta p||^2
 $$
@@ -70,7 +71,7 @@ $$
 How to solve the partial derivatives $$\frac{\partial e}{\partial \delta\xi}$$ and $$\frac{\partial e}{\partial p}$$ is now the key for use to find the update gradients, well for projection p, it's easy:
 
 $$
-\frac{\partial e}{\partial p} = \frac{partial e}{\partial P'} \frac{\partial P'}{\partial p} = \begin{bmatrix} 
+\frac{\partial e}{\partial p} = \frac{\partial e}{\partial P'} \frac{\partial P'}{\partial p} = \begin{bmatrix} 
 \frac{f_x}{Z'} & 0 & -\frac{f_xX'}{Z'^2} \\ 
 0 & \frac{f_y}{Z'} & -\frac{f_yY'}{Z'^2} \\  
 \end{bmatrix}R
@@ -89,7 +90,7 @@ operation rules.
 Here I'm going to give the results, according to perturbation lemma:
 
 $$
-\frac{\partial e}{\partial \delta \xi} = \frac{(\delta \xi \oplus \xi)\partial e}{\parial \delta \xi} = \frac{\partial e}{\partial P'} \frac{\partial P'}{\partial \xi}
+\frac{\partial e}{\partial \delta \xi} = \frac{(\delta \xi \oplus \xi)\partial e}{\partial \delta \xi} = \frac{\partial e}{\partial P'} \frac{\partial P'}{\partial \xi}
 $$
 
 Here $$\delta \xi$$ is the small perturbation delta and this equation decomposed derivative of lie group into two parts: 
@@ -101,7 +102,7 @@ $$\frac{\partial e}{\partial P'} = \begin{bmatrix}
 \end{bmatrix}$$
 
 Now the second partial is:
-$$frac{\partial P'}{\partial \delta \xi} = \frac{\partial (Tp)}{\partial \delta \xi} = begin{bmatrix} 
+$$frac{\partial P'}{\partial \delta \xi} = \frac{\partial (Tp)}{\partial \delta \xi} = \begin{bmatrix} 
 I & -P'^{\wedge} \\ 
 0 & 0 \\  
 \end{bmatrix}$$
