@@ -34,8 +34,8 @@ $$
            \rho \\
            \phi \\
          \end{bmatrix} \in R^6, \rho \in R^3, \phi \in SO(3), \xi^{\wedge} = \begin{bmatrix}
-                                                                             \phi^{\wedge} \rho \\
-                                                                             0^T 0 \\
+                                                                             \phi^{\wedge} & \rho \\
+                                                                             0^T & 0 \\
                                                                            \end{bmatrix} \in R^{4x4}
   \end{align}   
 $$
@@ -52,29 +52,6 @@ $$
 Equation above is just a normalization, and now we get:
 
 $$
-\begin{cases}
-  u_c' = u_c(1+k_1r_c^2 + k_2r^4_c)\\
-  v_c' = v_c(1 + k_1r_c^2 + k_2r_c^4)
-\end{cases}
-$$
-
-Here $$k$$ and $$r$$ are the camera skew model factors. This step calculate the rectified coordinate in camera.
-
-Finally, according to the intrinsic model, we can get the final pixel coordinate:
-
-$$
-\begin{cases}
- u_s = f_xu_c' + c_x
- v_s = f_xv_c' + c_y
-\end{cases}
-$$
-
-After projection, we can get the error from the observation points, their pixel coordinates are defined as $$z = [u_o, v_o]^T$$.
-Then error can be written as:
-
-$$
-e = z - h(\xi, p)
-$$
 
 Here h is the projection matrix, p is the 3d point (landmarker) in the world. By sum up all land marker in all time, we get a 
 cost function like this:
@@ -83,4 +60,36 @@ $$
 \sum_t\sum_p{||e_{tp}||^2}
 $$
 
-Which is a least squred optimization problem now.
+Which is a least squred optimization problem now. Since observation function $$h(\xi, p)$$ is a non-linear function, we can use
+Gauss-Newton method to optimize it. The delta update is $$\Delta = [\xi, p]$$ which is a $$6+n$$ vector, 6 is the degree of freedom of camera pose, $$n$$ is the land mark point number. Accordingly, use taylor approximation, we can approximate the cost
+function as the following equation:
+$$
+||e(x + \Deltax)||^2 = \sum_t\sum_p||e_{tp} + \frac{\partial e}{\partial \xi}\Delta xi + \frac{\partial e}{\partial \p}\Delta p||^2
+$$
+
+How to solve the partial derivatives $$\frac{\partial e}{\partial \delta\xi}$$ and $$\frac{\partial e}{\partial \p}$$ is now the key
+for use to find the update gradients, well for projection p, it's easy:
+
+$$
+\frac{\partial e}{\partial \p} = \frac{partial e}{\partial P'} \frac{\partial P'}{\partial p} = \begin{bmatrix} 
+\frac{f_x}{Z'} & 0 & -\frac{f_xX'}{{Z'}^2} \\ 
+0 & \frac{f_y}{Z'} & -\frac{f_yY'}{{Z'}^2} \\  
+\end{bmatrix}R
+$$
+
+Here $$P'$$ is the 3d point in camera coordinate. Since $$P' = Rp + t$$, thus $$\frac{\partial P'}{\partial p} = R$$.
+
+The real headache came from the camera pose $$\xi$$, since it's in SE(3), and it's hard to directly solve partial derivative 
+in SE(3), however, since the lie group shares the good property as in eucledian space, they are all smooth manifolds, thus we
+can introduce perturbation lemma ([J Huebschmann et, al](https://arxiv.org/pdf/0708.3977)) to approximate the jacobian.
+
+I'll discuss the derivation in Lie group in another post in detail, so if you are not familiar with the lie group, don't be 
+afraid, just note that it's just convert from one coordinate system to another coordinate system and mapped the geometric
+operation rules.
+
+Here I'm going to give the results, according to perturbation lemma:
+
+$$
+\frac{\partial e}{\partial \Delta \xi} = \frac{\partial e}{\parial \Delta} = \frac{\partial e}{\partial P'} \frac{\partial P'}{\partial \xi}
+$$
+
