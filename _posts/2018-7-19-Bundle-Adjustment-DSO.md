@@ -112,3 +112,28 @@ I & -P'^{\wedge} \\
 Note that the matrix above is a 4x4 matrix in homogeneous coordinate, and we only extract the first 3 rows:
 
 $$\frac{\partial P'}{\partial \delta\xi} = [I, -P'^{\wedge}]$$
+
+For simplicity, we note that $$\frac{\partial e}{\partial \xi}$$ as $$F$$ and $$\frac{\partial e}{\partial p}$$ as $$E$$.
+
+And we get the following equation:
+
+$$
+||e(x + \Delta x)||^2 = ||e + F \Delta \xi + E p||^2
+$$
+
+Thus, we can get the linear function for update $$\xi$$i and $$p$$:
+
+$$
+H\Delta x = b
+$$
+
+Here $$H$$ is the hessian matrix, in Gauss-Newton method, its:
+
+$$
+H = J^TJ = \begin{bmatrix} 
+F^TF & F^TE \\ 
+E^TF & E^TE \\  
+\end{bmatrix}
+$$
+
+In the upcoming post, I'll explain how to solve this $$H$$ matrix using it's sparse property, namely shur complete.
