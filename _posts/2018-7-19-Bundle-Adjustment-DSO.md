@@ -121,7 +121,7 @@ $$
 ||e(x + \Delta x)||^2 = ||e + F \Delta \xi + E p||^2
 $$
 
-Thus, we can get the linear function for update $$\xi$$i and $$p$$:
+Thus, we can get the linear function for update $$\xi$$ and $$p$$:
 
 $$
 H\Delta x = b
