@@ -1,5 +1,6 @@
 ---
-published: false
+layout: post
+title: cmake library build g2o
 ---
 If you happen to be using cmake library and there's no library found in the cmake list, don't worry, most `.cmake` files are stored in `/usr/share/cmake-X.X/Modules/` just manually copy those xxx.cmake file to that modules directory, then cmake will help you to locate the library path.
 
