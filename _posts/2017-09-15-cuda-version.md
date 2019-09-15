@@ -1,5 +1,6 @@
 ---
-published: false
+layout: post
+title: cuda version check
 ---
 if you installed cuda yet happen to be not able to find nvcc in your terminal, just navigate to the cuda libraries to execute the nvcc for checking the versions:
 
