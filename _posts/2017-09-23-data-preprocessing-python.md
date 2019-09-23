@@ -1,5 +1,6 @@
 ---
-published: false
+layout: post
+title: python batch text preprocess
 ---
 A simple script to remove redundent white space in a text file:
 
