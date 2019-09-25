@@ -1,5 +1,6 @@
 ---
-published: false
+layout: post
+title: schur complement speed up by deep estimator
 ---
 ## A Mathematical proposal for depth estimaiton optimization in direct method.
 
