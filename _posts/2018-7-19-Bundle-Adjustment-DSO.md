@@ -49,13 +49,13 @@ $$
 P_c = [u_c,v v_c, 1]^T = [X'/Z', Y'/Z', 1]^T
 $$
 
-Equation above is just a normalization, and now we get:
+Equation above is just a normalization, and now we define:
 
 $$z = h(\xi, p) \\
-  e = z - h(\xi, p)
+  e = z' - h(\xi, p)
 $$
 
-Here $$h$$ is the projection matrix, $$p$$ is the 3d point (landmarker) in the world. By sum up all land marker in all time, we get a 
+Here $$h$$ is the projection matrix, which project the host frame point $$p$$ (the 3d point (landmarker) in the world that is still in host frame coordinate) into target frame pixel position $$z = [u, v]$$. By sum up all land marker in all time, we get a 
 cost function like this:
 
 $$
@@ -123,13 +123,33 @@ $$
 ||e(x + \Delta x)||^2 = ||e + F \Delta \xi + E p||^2
 $$
 
-Thus, we can get the linear function for update $$\xi$$ and $$p$$:
+Take the derivative with respect to $$\Delta x$$ and set the objective to 0:
+
+$$
+\frac{\partial ||e(x + \Delta x)||^2}{\partial \Delta x} = 0
+$$
+
+Let's Denote $$ J^T = [F, E] $$ Then this equation becomes:
+
+$$
+\frac{\partial J}{\partial \Delta x} \Delta x + J \frac{\partial \Delta x}{\partial \Delta x} e + \frac{\partial e}{\partial \Delta x} = 0  
+$$
+
+Simplify this equation then we can get:
+
+$$
+\frac{\partial J}{\partial \Delta x} + J \cdot 1 \cdot e + 0 = 0
+$$
+
+Here $$\frac{\partial J}{\partial \Delta x}$$ is the Hessian matrix $$H$$, In Gauss-Newton method, people approximate Hessian with squared Jacobian $$H=J^TJ$$ because second derivative is pretty hard to solve.
+
+Thus, we can get the normal equation for update $$\xi$$ and $$p$$:
 
 $$
 H\Delta x = b
 $$
 
-Here $$H$$ is the hessian matrix, in Gauss-Newton method, its:
+Here $$H$$ is the hessian matrix, $$b$$ is $$J \cdot e$$. Let's take $$J^T = [F, E]$$ into $$H$$ then we can get:
 
 $$
 H = J^TJ = \begin{bmatrix} 
@@ -139,3 +159,7 @@ E^TF & E^TE \\
 $$
 
 In the upcoming post, I'll explain how to solve this $$H$$ matrix using it's sparse property, namely shur complete.
+
+
+
+Special thanks to Dr. Gao Xiang, who's offering a very exhaustive explanation on Visual SLAM.
