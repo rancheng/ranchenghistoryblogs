@@ -7,7 +7,11 @@ Direct methods normally hold the photometric consistancy assumption, and the dep
 
 Recall that in my previous note on [BA in DSO](https://rancheng.github.io/Bundle-Adjustment-DSO/) which derived the partial derivative of photometric error:
 
-$$$$ and we derived the gauss-newton equation for update $$\Delta x$$
+$$
+||e(x + \Delta x)||^2 = \sum_t\sum_p||e_{tp} + \frac{\partial e}{\partial \xi}\Delta \xi + \frac{\partial e}{\partial p}\Delta p||^2
+$$
+
+And we derived the gauss-newton equation for update $$\Delta x$$
 
 $$H \Delta x = b$$
 
