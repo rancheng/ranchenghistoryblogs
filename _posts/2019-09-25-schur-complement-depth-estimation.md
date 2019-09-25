@@ -22,4 +22,4 @@ $$
 
 To fully understand what H looks like we should first look into what Jacobian matrix looks like:
 
-![hessian_block.png]({{site.baseurl}}/_posts/hessian_block.png)
+![hessian_block.png]({{site.baseurl}}/images/hessian_block.png)
