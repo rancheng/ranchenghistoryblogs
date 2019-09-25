@@ -32,3 +32,5 @@ Here $$0_{2 \times 6}$$ means a 2 by 6 zero matix, since $$\frac{\partial \e}{\p
 
 From the figure above, we can see that this Jacobian matrix is mostly zero, except two non-zero partial derivatives. Those zero blocks means that the error $$e$$ has no correlation with those poses and land mark points. Thus when apply 
 $$H = J^TJ$$, we can see that sparcity from $$J$$ will directly contribute into $$H$$.
+
+If we represent camera poses and land mark points as nodes, the edges that connect each other should be the non-zero entries on Jacobian matrix.
