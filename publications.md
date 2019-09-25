@@ -4,7 +4,7 @@ title: Publications
 permalink: /publications/
 ---
 
-Several publications on robotics and learning.
+Several publications on robotics and learning. (Due to copyright issues, some paper are preprinted and thus not listed here, will upload the printed versions ASAP.)
 
 #### Conference Papers
 
