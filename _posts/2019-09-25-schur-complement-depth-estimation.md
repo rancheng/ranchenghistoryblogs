@@ -1,8 +1,7 @@
 ---
 layout: post
-title: schur complement speed up by deep estimator
+title: A Mathematical proposal for depth estimaiton optimization in direct method.
 ---
-## A Mathematical proposal for depth estimaiton optimization in direct method.
 
 Direct methods normally hold the photometric consistancy assumption, and the depth estimation from direct methods are jointly estimated with camera poses, which composite into a huge $$H$$ matrix.
 
