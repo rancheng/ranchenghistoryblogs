@@ -43,3 +43,30 @@ And you can observe the jacobian with this kind of shape:
 
 The gray area are the non-zero parts, which means there's a partial derivative w.r.t that parameter. (longer gray rectangle is camera pose, gray square is land mark point)
 
+![hessian_block.png]({{site.baseurl}}/images/hessian_block.png)
+
+Hessian matrix, as you can see, is exactly the same shape as **adjacency matrix** (except the diagonal blocks). We can regard those off-diagonal non-zero blocks as constraints between pose and points, thus we can definitely leverage the sparsity of the $$H$$ matrix and solve pose, point delta updates with schur elimination:
+
+Consider the following Gauss-Newton normal equation:
+
+$$
+\begin{bmatrix} 
+F^TF & F^TE \\ 
+E^TF & E^TE \\  
+\end{bmatrix}\Delta x = [F, E]^Te 
+$$
+
+We rewrite $$H$$ matrix with four blocks:
+
+$$
+\begin{bmatrix} 
+B & E \\ 
+E^T & C \\  
+\end{bmatrix}\begin{bmatrix} 
+\Delta \xi \\ 
+\Delta p \\  
+\end{bmatrix} = \begin{bmatrix} 
+v \\ 
+w \\  
+\end{bmatrix} 
+$$
