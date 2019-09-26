@@ -56,7 +56,7 @@ E^TF & E^TE \\
 \end{bmatrix}\Delta x = [F, E]^Te 
 $$
 
-We rewrite $$H$$ matrix with four blocks:
+We rewrite $$H$$ matrix with 3 blocks $$B$$, $$C$$, $$E$$:
 
 $$
 \begin{bmatrix} 
@@ -70,3 +70,61 @@ v \\
 w \\  
 \end{bmatrix} 
 $$
+
+$$B$$ is the diagonal block matrice, which represent camera pose, $$C$$ is also diagoal block matrice, each block is 3x3. Since diagonal block matrice inverse complexity is way easier than the normal matrix, we can only do inverse on those diagonal blocks. Now, let's do Gauss elimination for the equation above:
+
+$$
+\begin{bmatrix} 
+I & -EC^{-1} \\ 
+0 & I \\  
+\end{bmatrix}\begin{bmatrix} 
+B & E \\ 
+E^T & C \\  
+\end{bmatrix}\begin{bmatrix} 
+\Delta \xi \\ 
+\Delta p \\  
+\end{bmatrix} = \begin{bmatrix} 
+I & -EC^{-1} \\ 
+0 & I \\  
+\end{bmatrix}\begin{bmatrix} 
+v \\ 
+w \\  
+\end{bmatrix}
+$$
+
+Reorder this, we can get:
+
+$$
+\begin{bmatrix} 
+B-EC^{-1}E^T & 0 \\ 
+E^T & C \\  
+\end{bmatrix}\begin{bmatrix} 
+\Delta \xi \\ 
+\Delta p \\  
+\end{bmatrix} = \begin{bmatrix} 
+v-EC^{-1}w \\ 
+w \\  
+\end{bmatrix}
+$$
+
+it's obvious that first line of this equation is irrelevant to $$\Delta p$$. So we can use first line of the equation to solve camera pose:
+
+$$[B - EC^{-1}E^T]\Delta \xi = v - EC^{-1}w$$
+
+and use camera pose we just solved above to further solve $$\Delta p$$:
+
+$$\Delta p = C^{-1}(w - E^T\Delta \xi)$$
+
+Since $$C$$ is diagonal blocks, so the inverse of C is very easy to solve.
+
+Many people call these steps above marginalization, there's a reason they call it like this:
+
+From probabilistic perspective, we can regard this elimination as decomposite $$p(\Delta \xi, \Delta p)$$ into solving $$p(\Delta \xi)$$ first and then solve $$p(\Delta p)$$, which is equivalent to solve the conditional probability from marginal probability:
+
+$$P(\Delta \xi, \Delta p) = P(\Delta \xi) \cdot P(\Delta p | \Delta \xi)$$
+
+Many VO are using this method to solve this Hessian matrix, e.g. OKVIS, DSO, they are maintaining a local BA in the sliding window, and force update on each KeyFrame to control accumulated error. That's why they are all sparse visual odometries.
+
+**Question!** What if this $$C$$ matrix is not sparse, how do you solve it? 
+
+Eventually we are aiming toward solving the dense 3D situations, one way we can do now is use GPU to do real-time dense matrix decomposition, or, we can use the Deep methods to initialize $$C$$ and, like First Estimation Jacobian technique, we keep this estimation locally constant, and only update the $$C$$ matrix offline. This way, we are not just shrink the size of land mark observation $$C$$, but eliminated it in the sliding window for all. And the only matrix left to solve is just the diagonal block for camera pose, which is $$o(n)$$, $$n$$ is just the KeyFrame number in the sliding window. 
