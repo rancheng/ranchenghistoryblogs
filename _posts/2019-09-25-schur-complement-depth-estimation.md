@@ -1,6 +1,6 @@
 ---
 layout: post
-title: schur complement for Gauss-Newton Optimization
+title: schur complement for GN Optimization
 ---
 
 Direct methods normally hold the photometric consistancy assumption, and the depth estimation from direct methods are jointly estimated with camera poses, which composite into a huge $$H$$ matrix.
