@@ -34,3 +34,12 @@ From the figure above, we can see that this Jacobian matrix is mostly zero, exce
 $$H = J^TJ$$, we can see that sparcity from $$J$$ will directly contribute into $$H$$.
 
 If we represent camera poses and land mark points as nodes, the edges that connect each other should be the non-zero entries on Jacobian matrix.
+
+![covisibility.png]({{site.baseurl}}/images/covibility.png)
+
+And you can observe the jacobian with this kind of shape:
+
+![jacobian_block.png]({{site.baseurl}}/images/jacobian_block.png)
+
+The gray area are the non-zero parts, which means there's a partial derivative w.r.t that parameter. (longer gray rectangle is camera pose, gray square is land mark point)
+
