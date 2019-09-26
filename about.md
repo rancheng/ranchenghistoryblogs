@@ -6,7 +6,7 @@ permalink: /about/
 
 ![profile]({{ site.baseurl }}/images/profile_thumb.jpg "profile")
 
-<img align="left" src="{{ site.baseurl }}/images/profile_thumb.jpg">
+<img align="left" src="https://raw.githubusercontent.com/rancheng/rancheng.github.io/master/images/profile_thumb.jpg">
 
 I'm a robotics researcher, with experience on visual SLAM, deep learning and reinforcement learning.
 
