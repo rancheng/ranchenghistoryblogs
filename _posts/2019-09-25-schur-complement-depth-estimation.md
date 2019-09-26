@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A Mathematical proposal for depth estimaiton optimization in direct method.
+title: schur complement for Gauss-Newton Optimization
 ---
 
 Direct methods normally hold the photometric consistancy assumption, and the depth estimation from direct methods are jointly estimated with camera poses, which composite into a huge $$H$$ matrix.
