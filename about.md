@@ -8,7 +8,7 @@ permalink: /about/
 
 I'm a robotics researcher, with experience on visual SLAM, deep learning and reinforcement learning.
 
-Currently working at Center for Intelligent Machines, McGill University, as CS M.S. candidate & Research Assistant of Professor [Gregory Dudek](https://www.cim.mcgill.ca/~dudek/), looking for Ph.D in Robotics, Vision, and Learning.
+Currently working at Center for Intelligent Machines, McGill University, as CS M.S. candidate & Research Assistant of Professor [Gregory Dudek](https://www.cim.mcgill.ca/~dudek/), **looking for Ph.D in Robotics, Vision, and Learning**.
 
 Before that, I obtained B.S. in Tongji University, 2015, I joined iLab Tongji(2015-2017), USC and worked with Professor [Laurent Itti](http://ilab.usc.edu/itti/), Professor [Jianwei Lu](https://ieeexplore.ieee.org/author/37597287600), on robot LiDar SLAM and Multi-sensor (vision IMU and LiDar) fusion.
 
