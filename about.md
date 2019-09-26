@@ -6,6 +6,8 @@ permalink: /about/
 
 ![profile]({{ site.baseurl }}/images/profile_thumb.jpg "profile")
 
+<img align="left" src="{{ site.baseurl }}/images/profile_thumb.jpg">
+
 I'm a robotics researcher, with experience on visual SLAM, deep learning and reinforcement learning.
 
 Currently working at Center for Intelligent Machines, McGill University, as CS M.S. candidate & Research Assistant of Professor [Gregory Dudek](https://www.cim.mcgill.ca/~dudek/), **looking for Ph.D in Robotics, Vision, and Learning**.
