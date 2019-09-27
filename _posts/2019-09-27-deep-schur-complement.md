@@ -37,8 +37,26 @@ $$
  E = \theta(p1, p2)
 $$
 
+![hessian_arrow.png]({{site.baseurl}}/images/photometric_net.png)
+
 $$\theta$$ takes a small patch of image and output pixelwise error for each pixel. For those pixels without alignment, say, OOB points, the output is infinite and automatically mark them as outlier in the optimization steps.
 
 So our network takes two 3 channels patches, which in total is 6xWxH dimensional data, and output is a WxH matrix. This is simply multiple to 1 process, which compress the data, and network can be designed as the following diagram:
 
-![hessian_arrow.png]({{site.baseurl}}/images/photometric_net.png)
+![hessian_arrow.png]({{site.baseurl}}/images/photometric_net_arch.png)
+
+Our main goal is to minimize the error of predicted reprojection error, consusing hey?
+
+Let's explain by equations:
+
+$$
+L_{pe} = || E - E_{true} ||_{huber}
+$$
+
+Here $$E$$ is the pixelwise reprojection error prediction, and $$E_{true}$$ is the pixelwised distance to the ground truth reprojection position which can be defined as the following term:
+
+$$
+E_{true, ij} = ||I'_{ij} - K(RI_{ij}+t)||_2 
+$$
+
+But this will lead us a problem: the unbalanced dataset, due to the mathematic property of reprojection error represented in 2D, we can only get very limited (1) positive examples, this extremely unbalanced dataset will make the proposed network rapidly overfitted by higher error potions.
