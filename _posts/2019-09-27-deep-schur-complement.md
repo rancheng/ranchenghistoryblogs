@@ -61,6 +61,6 @@ $$
 
 But this will lead us a problem: the unbalanced dataset, due to the mathematic property of reprojection error represented in 2D, we can only get very limited (1) positive examples, this extremely unbalanced dataset will make the proposed network rapidly overfitted by higher error potions.
 
-![hessian_arrow.png]({{site.baseurl}}/images/reprojection_error.png)
+![hessian_arrow.png]({{site.baseurl}}/images/convex_reshape.png)
 
 Eventually, the photo-consistency network reshapes the reprojection errors into a convex manifold. Thus make each candidate pixel can navigate into a global minimal safely.
