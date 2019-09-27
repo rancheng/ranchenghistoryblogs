@@ -5,9 +5,15 @@ title: Deep Schur Complement
 Let's recall the last post about schur complement in estimating Hessian matrix:
 
 $$
-\begin{bmatrix} B-EC^{-1}E^T & 0 \\ E^T & C \\
-\end{bmatrix}\begin{bmatrix} \Delta \xi \\ \Delta p \\
-\end{bmatrix} = \begin{bmatrix} v-EC^{-1}w \\ w \\
+\begin{bmatrix} 
+B-EC^{-1}E^T & 0 \\ 
+E^T & C \\  
+\end{bmatrix}\begin{bmatrix} 
+\Delta \xi \\ 
+\Delta p \\  
+\end{bmatrix} = \begin{bmatrix} 
+v-EC^{-1}w \\ 
+w \\  
 \end{bmatrix}
 $$
 
