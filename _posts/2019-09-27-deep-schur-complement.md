@@ -4,10 +4,12 @@ title: Deep Schur Complement
 ---
 Let's recall the last post about schur complement in estimating Hessian matrix:
 
-$$ \begin{bmatrix} B-EC^{-1}E^T & 0 \ E^T & C \
-\end{bmatrix}\begin{bmatrix} \Delta \xi \ \Delta p \
-\end{bmatrix} = \begin{bmatrix} v-EC^{-1}w \ w \
-\end{bmatrix} $$
+$$
+\begin{bmatrix} B-EC^{-1}E^T & 0 \\ E^T & C \\
+\end{bmatrix}\begin{bmatrix} \Delta \xi \\ \Delta p \\
+\end{bmatrix} = \begin{bmatrix} v-EC^{-1}w \\ w \\
+\end{bmatrix}
+$$
 
 it's obvious that first line of this equation is irrelevant to $$\Delta p$$. So we can use first line of the equation to solve camera pose:
 
