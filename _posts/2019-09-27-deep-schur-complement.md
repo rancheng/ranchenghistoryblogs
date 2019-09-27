@@ -42,7 +42,7 @@ Now consider the photometric consistancy, why can't we use deep method to servic
 Let's define this photometric network like this:
 
 $$
- E = \theta(p1, p2)
+ E = \theta(p_1, p_2)
 $$
 
 ![hessian_arrow.png]({{site.baseurl}}/images/photometric_net.png)
