@@ -45,15 +45,15 @@ $$
  E = \theta(p_1, p_2)
 $$
 
-![hessian_arrow.png]({{site.baseurl}}/images/photometric_net.png)
+![photometric_net.png]({{site.baseurl}}/images/photometric_net.png)
 
 $$\theta$$ takes a small patch of image and output pixelwise error for each pixel. For those pixels without alignment, say, OOB points, the output is infinite and automatically mark them as outlier in the optimization steps.
 
 So our network takes two 3 channels patches, which in total is 6xWxH dimensional data, and output is a WxH matrix. This is simply multiple to 1 process, which compress the data, and network can be designed as the following diagram:
 
-![hessian_arrow.png]({{site.baseurl}}/images/photometric_net_arch.png)
+![photometric_net_arch.png]({{site.baseurl}}/images/photometric_net_arch.png)
 
-Our main goal is to minimize the error of predicted reprojection error, consusing hey?
+Our main goal is to minimize the error of predicted reprojection error, confusing hey?
 
 Let's explain by equations:
 
@@ -69,6 +69,6 @@ $$
 
 But this will lead us a problem: the unbalanced dataset, due to the mathematic property of reprojection error represented in 2D, we can only get very limited (1) positive examples, this extremely unbalanced dataset will make the proposed network rapidly overfitted by higher error potions.
 
-![hessian_arrow.png]({{site.baseurl}}/images/convex_reshape.png)
+![convex_reshape.png]({{site.baseurl}}/images/convex_reshape.png)
 
 Eventually, the photo-consistency network reshapes the reprojection errors into a convex manifold. Thus make each candidate pixel can navigate into a global minimal safely.
