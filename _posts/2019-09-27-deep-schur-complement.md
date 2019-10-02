@@ -72,3 +72,9 @@ But this will lead us a problem: the unbalanced dataset, due to the mathematic p
 ![convex_reshape.png]({{site.baseurl}}/images/convex_reshape.png)
 
 Eventually, the photo-consistency network reshapes the reprojection errors into a convex manifold. Thus make each candidate pixel can navigate into a global minimal safely.
+
+This approach above requires a good initialization for the patch proposals, what if the point are reprojected into a place that's way off. It's totally fine if you use $$SSIM$$, since the heuristic function already generalized well enough, but what about deep methods, if you are learning on the $$SSIM$$ function, for the unseen labels, what should you do.
+
+One solution we can try is to generate those mismatch cases, and label them using the traditional methods like $$SSIM$$, drawback is that this is just a learnt function approximator which might not be as good as the human enginnered function, plus this is a non-linear function, and will be hard to capture the gradient if we decide to contribute it into the loss.
+
+Another solution is we can try to use gaussian to discribe the match (reprojection match) belief. The variables we are going to estimate comes into a 1x2 vector.
