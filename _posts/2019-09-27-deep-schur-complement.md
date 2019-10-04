@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Deep Schur Complement
+title: Deep Mono VO
 ---
 Let's recall the last post about schur complement in estimating Hessian matrix:
 
