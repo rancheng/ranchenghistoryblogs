@@ -45,13 +45,13 @@ Here $$t$$ is time, $$l$$ is layer, and $$\Delta w$$ is the gradient for weight 
 and the $$\beta$$ function is defined as following:
 
 $$
-beta = =\begin{cases}
-               beta, if \Delta w > th_b\\
-               beta + 1, elsewise
+\beta = =\begin{cases}
+               \beta, if \Delta w > th_b\\
+               \beta + 1, elsewise
          \end{cases}
 $$
 
-This $$\pi$$ function will give out the forgetting coeffient for each weight, since this is a function of $$\Delta w$$, thus will be regard as a constant for each update and will contribute to the gradient with the partials:
+Here $$th_b$$ is the threshold of weight updates in each layer, which is a hyper-parameter. This $$\pi$$ function will give out the forgetting coeffient for each weight, since this is a function of $$\Delta w$$, thus will be regard as a constant for each update and will contribute to the gradient with the partials:
 
 $$
 \Delta w_i = \sum{\Delta w_{i+1} * w_{i+1} * \pi_{i+1}} * (1 - o_i) * o_{i-1}
