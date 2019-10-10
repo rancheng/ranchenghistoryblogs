@@ -16,7 +16,7 @@ parameters:
  - `thFactor` is the threshold scale factor (2 in paper) to scale up the smoothed threshold filtered histogram.
  
 If you are confused by the thresholding technique in the code, here's the simplified explanation:
- - calculate horizontal image gradient $$I_x$$, and vertical image gradient $$I_y$$, and get $$I_{xxyy} = ||I_x^2 + I_y^2||$$ as `absSquaredGradient` map (same size as original image). Then cut image into 32x32 small patches and count their gradients into histograms (HOG, 50 bins)
+ - calculate horizontal image gradient $$I_x$$, and vertical image gradient $$I_y$$, and get $$I_x^2 + I_y^2$$ as `absSquaredGradient` map (same size as original image). Then cut image into 32x32 small patches and count their gradients into histograms (HOG, 50 bins)
  - take first quantile of gradients (`hist[0]` is ~1024, take 90, which is top 10% highest gradients) as the HOG threshold of the scaled image (x32 smaller) and smooth the threshold map use it's mean value.
  - Finally, the vector `thsSmoothed` is the smoothed (x32 smaller) map to select the gradients. 
  
