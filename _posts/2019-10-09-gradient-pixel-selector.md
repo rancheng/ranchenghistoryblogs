@@ -22,7 +22,7 @@ If you are confused by the thresholding technique in the code, here's the simpli
  
  Now we have the gradient selection threshold map, and the gradient map, next is to loop the image and select points according to the local gradients:
 
-
+![pixel_selector.png]({{site.baseurl}}/images/pixel_selector.png)
  
  This is the original code with my comments:
  ```cpp
