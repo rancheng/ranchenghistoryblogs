@@ -320,3 +320,9 @@ return Eigen::Vector3i(n2, n3, n4);
  ```
 
 This whole function searches the random directional points with local gradients above certain threshold. Since it's invoked in `makeMaps` function and this function is a recursive function, the potential search area is changing according to each recursion, I will help you figure out what exactly is going on in the `makeMaps` recursive point selection operations. 
+
+In order to have a better understanding on the point selection policy, let's implement the whole pipeline in python [source code](https://github.com/rancheng/deep_mono_vo/blob/master/pixelSelector.py) and run the experiments on Kitti dataset. Final result is as following:
+
+![dso_psel.png]({{site.baseurl}}/images/dso_psel.png)
+
+From the figure above, we can observe that the selection policy by DSO governed the local region's density thus make the candidate reprojection points evenly spread in the whole image, whereas the laplacian of gaussian point selector are concentrated around the edges. However, despite DSO's sample strategy spread the sample point as even as possible, they are still depend on the local image gradients. This is reasonable, in order to calculate the photometric error and construct the local BA problem as strong convex as possible, gradient based sample technique is the best choice by far.
