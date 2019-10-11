@@ -283,7 +283,7 @@ if (ag2 > pixelTH2 * thFactor) {
     }
 }
 ```
-you can see that they write the `bestIdx2` into `map_out` and marked as 1, which means they are selected in the pixelswise patch. `n2` counts the selected point size in this cale
+you can see that they write the `bestIdx2` into `map_out` and marked as 1, which means they are selected in the pixelswise patch. `n2` counts the selected point size in this scale
 
 ```cpp
 // from this if all those following code are recording the map_out with those matched points
