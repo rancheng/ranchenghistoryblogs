@@ -321,7 +321,7 @@ return Eigen::Vector3i(n2, n3, n4);
 
 This whole function searches the random directional points with local gradients above certain threshold. Since it's invoked in `makeMaps` function and this function is a recursive function, the potential search area is changing according to each recursion, I will help you figure out what exactly is going on in the `makeMaps` recursive point selection operations. 
 
-In order to have a better understanding on the point selection policy, let's implement the whole pipeline in python [source code](https://github.com/rancheng/deep_mono_vo/blob/master/pixelSelector.py) and run the experiments on Kitti dataset. Final result is as following:
+In order to have a better understanding on the point selection policy, let's implement the whole pipeline in python ([source code](https://github.com/rancheng/deep_mono_vo/blob/master/pixelSelector.py)) and run the experiments on Kitti dataset. Final result is as following:
 
 ![dso_psel.png]({{site.baseurl}}/images/dso_psel.png)
 
