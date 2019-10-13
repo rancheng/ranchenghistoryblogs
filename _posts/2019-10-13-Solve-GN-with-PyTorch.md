@@ -12,6 +12,52 @@ Figure above illustrated Gauss-Newton method pipeline, which is iteratively esti
 ![ba_nn.png]({{site.baseurl}}/images/ba_nn.png)
 
 ```python
-x = torch.randn(N, D_in)
-y = torch.randn(N, D_out)
+# two frames:
+hostFrame = frame_window[0]
+targetFrame = frame_window[-1]
+# define the H matrix
+H = torch.randn(M, N)
+# reshape input H matrix:
+H = H.view(-1, N)
+# initial learning rate
+lr = 1e-5
+optimizer = optim.LBFGS(self.model.parameters(), lr=lr)
+def closure():
+    H, b, loss = calcResAndGS(x)
+    optimizer.zero_grad()
+    loss.backward()
+    return loss
+for lr in lr * .5**np.arange(10):
+    optimizer.step(closure)
 ```
+
+Here function `calcResAndGs` is the major function to calculate loss and estimate Hessian and Jacobian matrix from current pose:
+
+```python
+def calcResAndGS(x):
+    JbBuffer = torch.zeros([x.shape[0], npts], dtype=torch.float32)
+    refToNew = sophus.SE3(x)
+    # loop all selected points
+    e = torch.zeros([npts], dtype=torch.float32)
+    for i in range(npts):
+        reproj_p = torch.matmul(refToNew, point[i])
+        idepth = reprj_p[-1]
+        reproj_p = torch.matmul(K, reproj_p)
+        pe = targetFrame[reproj_p[0], reproj_p[1]] - hostFrame[point[i][0], point[i][1]]
+        e[i] = pe
+        dIdx = targetFrame.dx[reproj_p[0], reproj_p[1]]
+        dIdy = targetFrame.dy[reproj_p[0], reproj_p[1]]
+        u = reproj_p[0]
+        v = reproj_p[1]
+        # dedxi -> partial to the camera pose
+        jbBuffer[0, i] = idepth * dIdx
+        jbBuffer[1, i] = idepth * dIdy
+        jbBuffer[2, i] = -idepth * (u * dIdx + v * dIdy)
+        jbBuffer[3, i] = -u * v * dIdx - (1 + v * v) * dIdy
+        jbBuffer[4, i] = (1 + u * u) * dIdx + u * v * dIdy
+        jbBuffer[5, i] = -v * dIdx + u * dIdy
+    H = torch.matmul(jbBuffer.T, jbBuffer)
+    b = torch.matmul(jbBuffer.T, e)
+    loss = torch.sum(e)
+    return H, b, loss
+ ```
