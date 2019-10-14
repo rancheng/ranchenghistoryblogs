@@ -17,6 +17,7 @@ hostFrame = frame_window[0]
 targetFrame = frame_window[-1]
 # define the H matrix
 H = torch.randn(M, N)
+b = torch.randn(N, 1)
 # reshape input H matrix:
 x = torch.randn(N, 1, requires_grad=True)
 # initial learning rate
