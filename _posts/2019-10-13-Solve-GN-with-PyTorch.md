@@ -18,10 +18,10 @@ targetFrame = frame_window[-1]
 # define the H matrix
 H = torch.randn(M, N)
 # reshape input H matrix:
-H = H.view(-1, N)
+x = torch.randn(N, 1, requires_grad=True)
 # initial learning rate
 lr = 1e-5
-optimizer = optim.LBFGS(self.model.parameters(), lr=lr)
+optimizer = optim.LBFGS([x], lr=lr)
 def closure():
     H, b, loss = calcResAndGS(x)
     optimizer.zero_grad()
