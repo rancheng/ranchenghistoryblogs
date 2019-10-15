@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ROS with Python2 & Python3 confliction 
+title: ROS Python2 & Python3 conflict Resolve 
 ---
 
 Python2 and python3 conflict is headache. This post shares about how to solve this conflict.
