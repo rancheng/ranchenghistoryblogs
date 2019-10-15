@@ -326,3 +326,17 @@ In order to have a better understanding on the point selection policy, let's imp
 ![dso_psel.png]({{site.baseurl}}/images/dso_psel.png)
 
 From the figure above, we can observe that the selection policy by DSO governed the local region's density thus make the candidate reprojection points evenly spread in the whole image, whereas the laplacian of gaussian point selector are concentrated around the edges. However, despite DSO's sample strategy spread the sample point as even as possible, they are still depend on the local image gradients. This is reasonable, in order to calculate the photometric error and construct the local BA problem as strong convex as possible, gradient based sample technique is the best choice by far.
+
+After several experiments, I found an efficient method to mimic this point sample policy, that is by first apply a dense selection with LoG map, and then apply sparse random sampling:
+
+```python
+import random
+rdx = random.sample(range(len(sel_m_indx)), 13000)
+h, w = selection_map.shape
+temp_result = np.zeros((h, w))
+temp_result[sel_m_indx[rdx], sel_m_indy[rdx]] = 1
+```
+
+Here `13000` is the candidate point number you want to sample. Here's the quality results:
+
+![dense_selection2.png]({{site.baseurl}}/images/dense_selection2.png)
