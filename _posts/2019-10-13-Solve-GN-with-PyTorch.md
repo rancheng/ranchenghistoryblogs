@@ -83,6 +83,6 @@ For simplicity, we note that $$\frac{\partial e}{\partial \xi}$$ as $$F$$ and $$
 
 Here the Jacobian matrix is exactly the `hstack` of matrix `E` and `F`. As shown in the previous code, first three entries of `jbBuffer` is exactly partial w.r.t rotation vector, and last 3 entries are for translation vector.
 
-After 10 iterations, we can then apply our converged camera pose $$\xi$$, apply the reprojection to see the effect:
+The whole pipeline converges around 10 iterations, we can then apply our converged camera pose $$\xi$$, apply the reprojection to see the effect:
 
 ![reproj.png]({{site.baseurl}}/images/reproj.png)
