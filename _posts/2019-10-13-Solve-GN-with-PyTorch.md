@@ -15,6 +15,8 @@ Here we are regarding the big Hessian matrix as a layered weights, each row of H
 
 ![BANet.png]({{site.baseurl}}/images/BANet.png)
 
+Figure above is copyright of [BANet](https://arxiv.org/pdf/1806.04807.pdf)
+
 Similarly [BANet](https://arxiv.org/pdf/1806.04807.pdf) has done the same job using the MLP to learn the damping factor $$\lambda$$ which is mimic the LM method to normalize the searching trust region. And convert this iterative pipeline into a recurrent structure.
 
 ```python
