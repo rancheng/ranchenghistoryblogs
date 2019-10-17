@@ -11,7 +11,11 @@ Figure above illustrated Gauss-Newton method pipeline, which is iteratively esti
 
 ![ba_nn.png]({{site.baseurl}}/images/ba_nn.png)
 
-Here we are regarding the big Hessian matrix as a layered weights, each row of Hessian matrix is a layer of MLP, and the gradients propapated backwards is exactly the update of camera pose, after several trials, we can use this MLP to capture the camera pose $$x$$ in between each frame.
+Here we are regarding the big Hessian matrix as a layered weights, each row of Hessian matrix is a layer of MLP, and the gradients propapated backwards is exactly the update of camera pose, after several trials, we can use this MLP to capture the transformation $$\Delta x$$ in between each frame.
+
+![BANet.png]({{site.baseurl}}/images/BANet.png)
+
+Similarly [BANet](https://arxiv.org/pdf/1806.04807.pdf) has done the similar job, the only difference is that they are using the MLP to learn the damping factor $$\lambda$$ which is mimic the LM method to normalize the searching trust region.
 
 ```python
 # two frames:
