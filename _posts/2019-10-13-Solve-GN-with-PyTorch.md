@@ -18,15 +18,17 @@ Here we are regarding the big Hessian matrix as a layered weights, each row of H
 hostFrame = frame_window[0]
 targetFrame = frame_window[-1]
 # define the H matrix
-H = torch.randn(M, N)
-b = torch.randn(N, 1)
+H_old = torch.randn(M, N)
+b_old = torch.randn(N, 1)
 # reshape input H matrix:
 x = torch.randn(N, 1, requires_grad=True)
 # initial learning rate
 lr = 1e-5
 optimizer = optim.LBFGS([x], lr=lr)
 def closure():
-    H, b, loss = calcResAndGS(x)
+    H_new, b_new, loss = calcResAndGS(H_old, b_old, x)
+    H_old = H_new
+    b_old = b_new
     optimizer.zero_grad()
     loss.backward()
     return loss
