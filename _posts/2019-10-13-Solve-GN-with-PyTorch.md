@@ -30,9 +30,9 @@ b_old = torch.randn(N, 1)
 x = torch.randn(N, 1, requires_grad=True)
 # initial learning rate
 lr = 1e-5
-optimizer = optim.LBFGS([x], lr=lr)
+optimizer = optim.LBFGS([H, b, x], lr=lr)
 def closure():
-    H_new, b_new, loss = calcResAndGS(H_old, b_old, x)
+    H_new, b_new, loss = calcResAndGS(x)
     H_old = H_new
     b_old = b_new
     optimizer.zero_grad()
