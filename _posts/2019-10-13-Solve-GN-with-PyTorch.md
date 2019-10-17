@@ -11,6 +11,8 @@ Figure above illustrated Gauss-Newton method pipeline, which is iteratively esti
 
 ![ba_nn.png]({{site.baseurl}}/images/ba_nn.png)
 
+Here we are regarding the big Hessian matrix as a layered weights, each row of Hessian matrix is a layer of MLP, and the gradients propapated backwards is exactly the update of camera pose, after several trials, we can use this MLP to capture the camera pose $$x$$ in between each frame.
+
 ```python
 # two frames:
 hostFrame = frame_window[0]
