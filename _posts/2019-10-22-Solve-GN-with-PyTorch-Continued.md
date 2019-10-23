@@ -58,7 +58,7 @@ c_y(t_2 + r_{22}z + r_{20}(\frac{x - c_xz}{f_x}) + r_{21}(\frac{y - (c_yz)}{f_y}
 t_2 + r_{22}z + r_{20}(\frac{x - c_xz}{f_x}) + r_{21}*(\frac{y - (c_yz)}{f_y})
 \end{bmatrix}$$
 
-Now this equation will be very long that's bad for display, let's consider backward:
+Now this equation will be very long that's bad for display (you can derive this equation from matlab anyway), let's consider backward:
 
 $$e = \sqrt{(I(p') - I(p))^2}$$
 
@@ -72,5 +72,119 @@ Okay, that's simple right? current depth of p is mostly propotational to the pro
 
 Now, let's focus on the easiest part, solving depth from the selected point hessians (with high local gradient), the `PyTorch` implementation is easy, since autograd function will take care most part of the gradient, the only thing we need to care for is to implement the backward gradient function of $$I(p)$$:
 
+Let's first define the point and camera intrinsic tensor:
 
+```python
+device = torch.device("cuda:0")
+p = torch.tensor([x_, y_, z_], dtype=torch.double, requires_grad=True)
+p = torch.reshape(p, (3, 1))
+K = torch.tensor(data.calib.K_cam3, dtype=torch.double)
+```
 
+Then get the image tensor and image gradient (gradient function was in my [deep vo repo](https://github.com/rancheng/deep_mono_vo), too length to post here):
+
+```python
+data_img_current = torch.tensor(np.array(data.get_cam3(img_id)))
+data_img_next = torch.tensor(np.array(data.get_cam3(img_id+1)))
+# gradient of image
+img_cur_dx_, img_cur_dy_ = image_gradients(data_img_current)
+img_next_dx_, img_next_dy_ = image_gradients(data_img_next)
+# convert those things to tensors
+img_cur_dx = torch.tensor(img_cur_dx_, dtype=torch.double)
+img_cur_dy = torch.tensor(img_cur_dy_, dtype=torch.double)
+img_next_dx = torch.tensor(img_next_dx_, dtype=torch.double)
+img_next_dy = torch.tensor(img_next_dy_, dtype=torch.double)
+```
+
+Followed with the tranformation matrix $$T_{h2t}$$, from host to target:
+
+```python
+T = torch.tensor(np.dot(pose_next, np.linalg.inv(pose_current)))
+```
+
+And we can now apply the reprojection safely:
+
+```python
+pki = torch.mm(K.inverse(), p)
+ext_homo = torch.ones(1,1).double()
+pki = torch.cat((pki, ext_homo), dim=0)
+pTki = torch.mm(torch.tensor(np.linalg.inv(pose_current)), pki)
+pTki = torch.mm(torch.tensor(pose_current), pTki)
+pkTki = torch.mm(K, pTki[0:3])
+```
+
+Now we get the coordinate of the reprojected point (experimental results):
+
+```python
+tensor([[ 8.0176],
+        [15.0874],
+        [ 1.0000]], dtype=torch.float64, grad_fn=<DivBackward0>)
+```
+Since `PyTorch` didn't define this gradient of image per pixel, we have to make our own:
+
+```python
+class photometric_error(torch.autograd.Function):
+    @staticmethod
+    def forward(ctx, input):
+        # input: px py, p'_x, p'_y which is coordinate of point in host frame, and point in target frame
+        # forward goes with the image error compute
+        ctx.save_for_backward(input)
+        return data_img_next[input[0].long(), input[1].long()]
+    @staticmethod
+    def backward(ctx, grad_output):
+        input, = ctx.saved_tensors
+        grad_input = grad_output.clone()
+        grad_input = grad_input.double()
+        pnext_dx = img_next_dx[input[0].long(), input[1].long()].clone().double()
+        pnext_dy = img_next_dy[input[0].long(), input[1].long()].clone().double()
+        print(pnext_dx)
+        grad_dx = grad_input*pnext_dx
+        grad_dy = grad_input*pnext_dy
+        grad_ret = grad_dx + grad_dy
+        grad_ret = torch.reshape(grad_ret, (3, 1))
+        print(grad_ret)
+        return grad_ret
+```
+
+Extend the `torch.autograd.Function` and implement the `forward`, `backward` functions so that we get the gradient chain hooked.
+
+Then let's just apply this function and caculate the loss:
+
+```python
+perr = photometric_error.apply
+peP = perr(pkTki)
+loss = (peP - data_img_current[x_, y_]).pow(2).sum()
+```
+
+and before you apply the `backward` pass, remind the tensors to keep their gradients:
+
+```python
+peP.retain_grad()
+pkTki.retain_grad()
+p.retain_grad()
+```
+
+Now, you can safely apply `loss.backward()`:
+
+```python
+loss: tensor([2.2309], dtype=torch.float64)
+```
+Our gradient $$\frac{\partial E}{\partial I}$$ is as following:
+
+```python
+tensor([[468.0704],
+        [434.6368],
+        [585.0880]], dtype=torch.float64)
+```
+
+and let's see the gradient of `p`:
+
+```python
+tensor([[  0.184868],
+        [  0.171663],
+        [-4.072140]], dtype=torch.float64)
+```
+
+Let's make this whole pipeline into a loop and loop until loss doesn't change (usually 3 steps) and we can get our converged depth.
+
+Now we can just apply CSPN or any sparse propagation method to update the depth proposals to finish our unsupervised training loop.
