@@ -15,6 +15,8 @@ $$p' = K T_i dK^{-1}p $$
 
 Here $$p$$ is the point in host frame, $$p'$$ is the point in target frame, both are in pixel coordinates, and $$K$$ is intrinsic, $$T_i$$ is host to target 3x4 traformation matrix which can be expreseed in SE3, a 1x6 vector. $$d$$ is the depth of point $$p$$, we put it outside $$p$$ since we are going to apply it's depth after it's recovery into world coordinate. 
 
+![sparse_depth_init.png]({{site.baseurl}}/images/sparse_depth_init.png)
+
 Since our depth estimation is off, so the projection will be slightly off too, results on kitti will be like this:
 
 ![reproj_kitti.png]({{site.baseurl}}/images/reproj_kitti.png)
