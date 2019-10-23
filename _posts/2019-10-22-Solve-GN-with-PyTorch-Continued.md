@@ -72,6 +72,8 @@ Okay, that's simple right? current depth of p is mostly propotational to the pro
 
 Now, let's focus on the easiest part, solving depth from the selected point hessians (with high local gradient), the `PyTorch` implementation is easy, since autograd function will take care most part of the gradient, the only thing we need to care for is to implement the backward gradient function of $$I(p)$$:
 
+![ba_optimizer_depth.png]({{site.baseurl}}/images/ba_optimizer_depth.png)
+
 Let's first define the point and camera intrinsic tensor:
 
 ```python
