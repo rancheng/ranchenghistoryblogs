@@ -30,7 +30,7 @@ b_old = torch.randn(N, 1)
 x = torch.randn(N, 1, requires_grad=True)
 # initial learning rate
 lr = 1e-5
-optimizer = optim.LBFGS([H, b, x], lr=lr)
+optimizer = optim.LBFGS([x], lr=lr)
 def closure():
     H_new, b_new, loss = calcResAndGS(x)
     H_old = H_new
@@ -47,7 +47,8 @@ Here function `calcResAndGs` is the major function to calculate loss and estimat
 ```python
 def calcResAndGS(x):
     JbBuffer = torch.zeros([x.shape[0], npts], dtype=torch.float32)
-    refToNew = sophus.SE3(x)
+    inc = np.linalg.inv(H_old[:6, :6]) * b_old
+    refToNew = inc * sophus.SE3(x)
     # loop all selected points
     e = torch.zeros([npts], dtype=torch.float32)
     for i in range(npts):
