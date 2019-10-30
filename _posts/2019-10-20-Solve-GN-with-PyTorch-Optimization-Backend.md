@@ -19,7 +19,7 @@ Inspired by [DSO](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7898369),
 
 Now with knowing enough big picture on what we should do, let's take a close look on how to implement them. First step is to estimate pose, which was introduced in my [last post](https://rancheng.github.io/Solve-GN-with-PyTorch/). Then we can do depth estimation with the following equation:
 
-$$h(I_{t'}, \xi_1, d_2) = I_{t'}[KT_{w2c}\xi_1d_{2, i}T_{w2c}^{-1}[p_i]K^{-1}p_i] \forall i \in \theta$$
+$$h(I_{t'}, \xi_1, d_2) = I_{t'}[KT_{w2c}\xi_1T_{w2c}^{-1}d_{2, i}[p_i]K^{-1}p_i] \forall i \in \theta$$
 
 Here $$\xi$$ is the camera pose and the $$\theta$$ is the selected gradient point sets.
 
