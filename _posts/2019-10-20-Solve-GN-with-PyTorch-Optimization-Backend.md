@@ -3,7 +3,7 @@ layout: post
 title: Solve BA with PyTorch Optimization Backend
 ---
 
-This post shows how to use LBFGS optimizer to parallelly optimize dense BA.
+This post shows how to use LBFGS optimizer to solve Bundle Adjustment.
 
 ![ba_pipeline_nets.png]({{site.baseurl}}/images/ba_pipeline_nets.png)
 
