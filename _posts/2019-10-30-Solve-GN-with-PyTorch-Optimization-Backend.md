@@ -387,6 +387,7 @@ loss: 7957.0
 ```
 
 Yes, you can see the optimizer found the global optimal at 3rd iteration:
+
 ```python
 -------------iter: 3-----------------
 p2: tensor([[731.0090],
@@ -395,6 +396,7 @@ p2: tensor([[731.0090],
 d: tensor([27.5348], dtype=torch.float64)
 loss: 1194.0
 ```
+
 
 but quickly overshoot into another direction that has even higher loss than the original reprojection. The reason this happens is in two fold:
  - L-BFGS algorithm will not converge in the true global minimum even if the learning rate is very small.
@@ -405,3 +407,12 @@ but quickly overshoot into another direction that has even higher loss than the 
 Yes, one remedy could be introduce the trust region framework and offer the optimizer a damping factor. Yet this still can't solve the non-convex property on the image side.
 
 That's why DSO introduced a residual pattern which combines the nearby points as comparisons to smooth out the loss manifold. However this is still problemtic, since this manifold will eventually hit into a flat plane when the point is in repeated texture local region, how to solve that? Well, one way we can try is still pyramid method, hoping in another scale space we can hit into boundary of the local region and remove the nullspace, another way is to introduce deep methods to solve this problem, by converting the points into feature maps, `n` points with `n` feature maps and we compare the feature maps' distance to construct a very smooth loss function which is more friendly on second order optimizers.
+
+By simply apply the 9 dimensional residual pattern and get them reproject into the target frame, we can get the simple SSD loss 
+heat map as following:
+
+![reproj_loss_heatmap.png]({{site.baseurl}}/images/reproj_loss_heatmap.png)
+
+Seems like a convex platform hey? How about the following map, this is the loss manifold on the enlarged trust region, you can find our non-convex it is:
+
+![reproj_loss_heatmap_large.png]({{site.baseurl}}/images/reproj_loss_heatmap_large.png)
