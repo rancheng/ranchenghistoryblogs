@@ -416,3 +416,5 @@ heat map as following:
 Seems like a convex platform hey? How about the following map, this is the loss manifold on the enlarged trust region, you can find out how non-convex this map is:
 
 ![reproj_loss_heatmap_large.png]({{site.baseurl}}/images/reproj_loss_heatmap_large.png)
+
+That's exactly why DSO and any direct methods requires a very good initialization, since the optimization backend needs a really convex setting, especially for the second order non-linear ones.
