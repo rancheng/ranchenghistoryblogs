@@ -413,6 +413,6 @@ heat map as following:
 
 ![reproj_loss_heatmap.png]({{site.baseurl}}/images/reproj_loss_heatmap.png)
 
-Seems like a convex platform hey? How about the following map, this is the loss manifold on the enlarged trust region, you can find our non-convex it is:
+Seems like a convex platform hey? How about the following map, this is the loss manifold on the enlarged trust region, you can find out how non-convex this map is:
 
 ![reproj_loss_heatmap_large.png]({{site.baseurl}}/images/reproj_loss_heatmap_large.png)
