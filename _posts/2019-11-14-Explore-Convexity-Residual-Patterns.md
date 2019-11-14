@@ -15,7 +15,7 @@ Image above illustrate how a single pixel point get reprojected from one frame t
 
 By adjust the depth, our reprojection will be moving along the tangent line bewteen the epipolar plane and image plane. In the image above, green dot depth is `4m` and blue dot depth is `15m`, and the maximum depth is `40m`. So as you can see, the bigger depth can't change much in the pixel coordinates, and will eventually converge into the point close to the ground truth, this constraint shares a very good property for the optimizer, since it cut the 2D local manifold into a strong convex line that further reduce the computation complexity.
 
-From [DSO](http://vladlen.info/papers/DSO.pdf (2.2 Model Formulation, page 4)
+From [DSO](http://vladlen.info/papers/DSO.pdf) (2.2 Model Formulation, page 4)
 
 > evaluating the SSD over such a small neighborhood of pixels is similar to adding first- and second-order irradiance derivative constancy terms (in addition to irradiance constancy) for the central pixel.
 
@@ -35,7 +35,7 @@ The image above shows how the residual pattern works on the ground truth reproje
 
 $$E_{pj} = \sum_{p \in N_p} w_p ||(I_j[p'] - b_j) - \frac{t_je^{a_j}}{t_ie^{a_i}}(I_i[p] - b_i)||_r$$
 
-Here $$||.||_r$$ is the huber weights, implementation in `C++` is as following:
+Here $$ ||.||_r $$ is the huber weights, implementation in `C++` is as following:
 
 ```cpp
 float residual = hitColor[0] - r2new_aff[0] * rlR - r2new_aff[1];
