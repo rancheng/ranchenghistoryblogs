@@ -97,7 +97,7 @@ Note that we calcualte the hessian of error image, to avoid the numerical error,
 
 ![error_manifold_smooth.png]({{site.baseurl}}/images/error_manifold_smooth.png)
 
-Actualy we can directly use the determinant of hessian matrix in each pixel to see if this local region is convex, simple check if they are greater than zero, to see if the error hessian is positive definite, then we can say this plane is convex or not.
+Actualy we can directly use the determinant of hessian matrix in each pixel to see if this local region is convex, simply check if they are greater than zero, to see if the error hessian is positive definite, then we can say this plane is convex or not.
 
 This is the hessian map of random pattern with radius size 6.
 
