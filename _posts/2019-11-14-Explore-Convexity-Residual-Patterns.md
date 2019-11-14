@@ -114,3 +114,5 @@ This is the hessian map of random pattern with radius size 10.
 A more qualitative comparison is as following:
 
 ![hessian_error_comparison.png]({{site.baseurl}}/images/hessian_error_comparison.png)
+
+From the above image we can see that the DSO's residual pattern is equavilant to the smaller random pattern. But none of the smaller pattern nor the larger pattern create a convex local region close to the reprojected point. Thus the dynamic random pattern can create a more robust and fast convergence rate photometric loss.
