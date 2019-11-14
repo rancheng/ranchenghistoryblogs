@@ -35,7 +35,7 @@ The image above shows how the residual pattern works on the ground truth reproje
 
 $$E_{pj} = \sum_{p \in N_p} w_p \parallel (I_j[p'] - b_j) - \frac{t_je^{a_j}}{t_ie^{a_i}}(I_i[p] - b_i)\parallel_r$$
 
-Here $$\parallel \cdot \parallel_r$$ is the huber weights, implementation in `C++` is as following:
+Here $$\parallel \cdot \parallel_r$$ is the huber weights, implementation in `DSO` is as following:
 
 ```cpp
 float residual = hitColor[0] - r2new_aff[0] * rlR - r2new_aff[1];
@@ -50,3 +50,4 @@ Let's go back to our first image, where point in the frames with stable illumina
 
 ![residual_manifold_reproj.png]({{site.baseurl}}/images/residual_manifold_reproj.png)
 
+Here `reproj_p` is the reprojected point in the target frame with the initial estimated depth and pose, `gt_p` is the ground truth point corresponding to the orignal point in the host frame. From the image above, we can see that the error manifold is never convex even in the small patch (15x15) neighbourhood. Since the pattern size is pretty small, thus this error is qeuivalent to reduced mean convolve of the 3x3 kernel with the whole image. That's why you can still see the rough shape of the original image.
