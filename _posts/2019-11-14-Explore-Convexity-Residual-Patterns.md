@@ -33,9 +33,9 @@ And we have tested the residual pattern in our module for a small patch (15x15).
 
 The image above shows how the residual pattern works on the ground truth reprojected point, you can see even though the point is perfectly aligned, the local region still exist some noise due to the surface reflection and occlusions, this will introduce extra error into the loss manifold and slowly corrupt the system, in the paper of DSO, the author use the huber weight to normalize the error:
 
-$$E_{pj} = \sum_{p \in N_p} w_p ||(I_j[p'] - b_j) - \frac{t_je^{a_j}}{t_ie^{a_i}}(I_i[p] - b_i)||_r$$
+$$E_{pj} = \sum_{p \in N_p} w_p \norm{(I_j[p'] - b_j) - \frac{t_je^{a_j}}{t_ie^{a_i}}(I_i[p] - b_i)}_r$$
 
-Here $$ ||.||_r $$ is the huber weights, implementation in `C++` is as following:
+Here $$\norm{}_r$$ is the huber weights, implementation in `C++` is as following:
 
 ```cpp
 float residual = hitColor[0] - r2new_aff[0] * rlR - r2new_aff[1];
@@ -44,5 +44,5 @@ float hw = fabs(residual) < setting_huberTH ? 1 : setting_huberTH / fabs(residua
 // energy is the huber normalized residual.
 energy += hw * residual * residual * (2 - hw);
 ```
-Here the residual is single pixel's intensity error after exposure affine correction, the `r2new_aff[0]` is thus \( \frac{t_je^{a_j}}{t_ie^{a_i}} \) and `r2new_aff[1]` is \(b_i - b_j\). The affine variables \(a_i\), \(a_j\), \(b_i\), \(b_i\) are jointly optimized in the estimation of the camera pose step. That's why the DSO's hessian block is 8x8, since they have 8 dimensional residuals, 6 DoF pose plus 2 affine models (8x(6+2)).
+Here the residual is single pixel's intensity error after exposure affine correction, the `r2new_aff[0]` is thus $$ \frac{t_je^{a_j}}{t_ie^{a_i}} $$ and `r2new_aff[1]` is $$b_i - b_j$$. The affine variables $$a_i$$, $$a_j$$, $$b_i$$, $$b_i$$ are jointly optimized in the estimation of the camera pose step. That's why the DSO's hessian block is 8x8, since they have 8 dimensional residuals, 6 DoF pose plus 2 affine models (8x(6+2)).
 
