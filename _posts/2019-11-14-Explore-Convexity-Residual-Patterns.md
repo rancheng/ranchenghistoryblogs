@@ -35,7 +35,7 @@ The image above shows how the residual pattern works on the ground truth reproje
 
 $$E_{pj} = \sum_{p \in N_p} w_p ||(I_j[p'] - b_j) - \frac{t_je^{a_j}}{t_ie^{a_i}}(I_i[p] - b_i)||_r$$
 
-Here \(||.||_r\) is the huber weights, implementation in `C++` is as following:
+Here $$||.||_r$$ is the huber weights, implementation in `C++` is as following:
 
 ```cpp
 float residual = hitColor[0] - r2new_aff[0] * rlR - r2new_aff[1];
