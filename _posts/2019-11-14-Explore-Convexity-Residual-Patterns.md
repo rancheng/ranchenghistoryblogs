@@ -33,9 +33,9 @@ And we have tested the residual pattern in our module for a small patch (15x15).
 
 The image above shows how the residual pattern works on the ground truth reprojected point, you can see even though the point is perfectly aligned, the local region still exist some noise due to the surface reflection and occlusions, this will introduce extra error into the loss manifold and slowly corrupt the system, in the paper of DSO, the author use the huber weight to normalize the error:
 
-$$E_{pj} = \sum_{p \in N_p} w_p \norm{(I_j[p'] - b_j) - \frac{t_je^{a_j}}{t_ie^{a_i}}(I_i[p] - b_i)}_r$$
+$$E_{pj} = \sum_{p \in N_p} w_p \parallel (I_j[p'] - b_j) - \frac{t_je^{a_j}}{t_ie^{a_i}}(I_i[p] - b_i)\parallel_r$$
 
-Here $$\norm{}_r$$ is the huber weights, implementation in `C++` is as following:
+Here $$\parallel \cdot \parallel_r$$ is the huber weights, implementation in `C++` is as following:
 
 ```cpp
 float residual = hitColor[0] - r2new_aff[0] * rlR - r2new_aff[1];
