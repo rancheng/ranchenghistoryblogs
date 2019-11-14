@@ -63,7 +63,7 @@ random_pattern = gradius*np.random.rand(gsamples, 2) - gradius/2
 ```
 Here the `gradius`, `gsamples` variables are inverse propotional to the local gradient score.
 
-$$p_g = \frac{\sum_{i \in N}{|I_x(i)| + |I_y(i)|}}{N}$$
+$$p_g = \frac{\sum_{i \in N}{(|I_x(i)| + |I_y(i)|)}}{N}$$
 
 Here $$p_g$$ is the local gradient score in point p.
 
@@ -73,8 +73,12 @@ The effect of the random pattern in the same reprojected point pairs is shown in
 
 ![error_manifold_same_size.png]({{site.baseurl}}/images/error_manifold_same_size.png)
 
+From the image above we can see that this random pattern is creating a stable local convex manifold, strict mathematic prove will be released in the upcoming publications, from this we can see that this method is equivalent to find the corners as discriptions as in feature based methods, future extensions will include the rotation invariant and scale invariant pattern. Implementation will simple be propose multiple scale or oriented patterns, but only take the smallest error as the final photometric error.
+
 We only visualized five runs of same random sample radius size, from the figure above, we can see that this manifold is still not smooth enough nor convex. Note that when random sample radius size is small as 3, the error manifold is no difference with the DSO's residual pattern, that is the point distribution will cover most of the pattern in the 8 point pattern.
 
 However, if we change the radius of random pattern, the error manifold will have drastic changes on the local convexity:
 
 ![error_manifold_different_rand_size.png]({{site.baseurl}}/images/error_manifold_different_rand_size.png)
+
+This figure shows that with the increased size of random sample pattern, the error is not getting more and more convex, rather this convexity is decreased and then increased, and eventually, as the sample radius increase, corrupt (become noisy), and contribute no effect on bundle adjustment optimization.
