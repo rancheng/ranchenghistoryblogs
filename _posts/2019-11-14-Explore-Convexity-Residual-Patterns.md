@@ -54,6 +54,27 @@ Here `reproj_p` is the reprojected point in the target frame with the initial es
 
 Since DSO is using Gauss-Newton method to do bundle adjustment, thus they also requires the good initialization and locally convex of photometric error, thus they select the points with the higher gradient points as candidates, since the high gradient points neighbourhood will create unique combination of pattern which limited the manifold from decaying their convexity. However, in our method, we are planning to do dense depth estimation, this simple pattern strategy won't hold our locally convex assumption, since there must be repeated textures or low texture patterns.
 
-One of our strategy is to leverage those fixed map point as extra constrains on the optimization of the rest points, by doing this, we are assuming all points are not independently hold their own inverse depths, instead, their inverse depths should be a likelihood that are defined by it's neighbourhood, we can thus propagate our likelihood from the known map points to those unknow points with the update of new observations (constrains).
+One of our strategy is to leverage those fixed map point as extra constrains on the optimization of the rest points, by doing this, we are assuming all points are not independently hold their own inverse depths, instead, their inverse depths should be a likelihood that are defined by it's neighbourhood, we can thus propagate our likelihood from the known map points to those unknow points with the update of new observations (constrains). However, this method requires updating the dense map with many iterations until depth convergence, which is super computation expensive.
 
-$$\frac{\partial p(id_i)}{\partial id_i} = \frac{\partial p(id_j)p(id_i|id_j)}{\partial id_j p(id_j)}$$
+Thus we propose a more robust and simple method to capture the photometric error efficiently yet still keep the local convexity: random dynamic pattern.
+
+```python
+random_pattern = gradius*np.random.rand(gsamples, 2) - gradius/2
+```
+Here the `gradius`, `gsamples` variables are inverse propotional to the local gradient score.
+
+$$p_g = \frac{\sum_{i \in N}{|I_x(i)| + |I_y(i)|}}{N}$$
+
+Here $$p_g$$ is the local gradient score in point p.
+
+$$g_r = \frac{\eta}{p_g}$$ is the `gradius`, and $$\eta$$ is the normalize constant. Same equation for the `gsamples` with different sample size normalizer.
+
+The effect of the random pattern in the same reprojected point pairs is shown in the following figure:
+
+![error_manifold_same_size.png]({{site.baseurl}}/images/error_manifold_same_size.png)
+
+We only visualized five runs of same random sample radius size, from the figure above, we can see that this manifold is still not smooth enough nor convex. Note that when random sample radius size is small as 3, the error manifold is no difference with the DSO's residual pattern, that is the point distribution will cover most of the pattern in the 8 point pattern.
+
+However, if we change the radius of random pattern, the error manifold will have drastic changes on the local convexity:
+
+![error_manifold_different_rand_size.png]({{site.baseurl}}/images/error_manifold_different_rand_size.png)
