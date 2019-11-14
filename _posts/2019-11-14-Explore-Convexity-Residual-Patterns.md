@@ -5,7 +5,7 @@ title: Explore the Convexity of Photometric Loss
 
 As we can see from my last post [BA with PyTorch](https://rancheng.github.io/Solve-GN-with-PyTorch-Optimization-Backend/) that the direct method that compare the pixel intensity or small patch is extremely non-convex, thus become a huge obstacle for second order optimizers to converge into global or even local minimals. So, in this post we are exploring the method to constrain the photometric error to be as convex as possible. Actually, with a good initialization (achieved by deep methods) the depth estimation can be very close to the ground truth.
 
-This prior loose our assumption to be maintaining a locally convex error manifold, since our optimizer will normally terminate in few iterations (estimations are close to the ground truth).
+This good initialization loose our assumption to be maintaining a locally convex error manifold, since our optimizer will normally terminate in few iterations (estimations are close to the ground truth).
 
 ![reprojection_vis.png]({{site.baseurl}}/images/reprojection_vis.png)
 
