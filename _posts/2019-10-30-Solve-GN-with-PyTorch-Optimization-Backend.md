@@ -323,67 +323,6 @@ p2: tensor([[730.7601],
         [  1.0000]], dtype=torch.float64)
 d: tensor([28.7358], dtype=torch.float64)
 loss: 7957.0
--------------iter: 5-----------------
-p2: tensor([[730.7601],
-        [132.2721],
-        [  1.0000]], dtype=torch.float64)
-d: tensor([28.7358], dtype=torch.float64)
-loss: 7957.0
--------------iter: 5-----------------
-p2: tensor([[730.7615],
-        [132.2716],
-        [  1.0000]], dtype=torch.float64)
-d: tensor([28.7286], dtype=torch.float64)
-loss: 7957.0
--------------iter: 6-----------------
-p2: tensor([[730.7615],
-        [132.2716],
-        [  1.0000]], dtype=torch.float64)
-d: tensor([28.7286], dtype=torch.float64)
-loss: 7957.0
--------------iter: 6-----------------
-p2: tensor([[730.7629],
-        [132.2711],
-        [  1.0000]], dtype=torch.float64)
-d: tensor([28.7214], dtype=torch.float64)
-loss: 7957.0
--------------iter: 7-----------------
-p2: tensor([[730.7629],
-        [132.2711],
-        [  1.0000]], dtype=torch.float64)
-d: tensor([28.7214], dtype=torch.float64)
-loss: 7957.0
--------------iter: 7-----------------
-p2: tensor([[730.7644],
-        [132.2706],
-        [  1.0000]], dtype=torch.float64)
-d: tensor([28.7142], dtype=torch.float64)
-loss: 7957.0
--------------iter: 8-----------------
-p2: tensor([[730.7644],
-        [132.2706],
-        [  1.0000]], dtype=torch.float64)
-d: tensor([28.7142], dtype=torch.float64)
-loss: 7957.0
--------------iter: 8-----------------
-p2: tensor([[730.7658],
-        [132.2702],
-        [  1.0000]], dtype=torch.float64)
-d: tensor([28.7070], dtype=torch.float64)
-loss: 7957.0
--------------iter: 9-----------------
-p2: tensor([[730.7658],
-        [132.2702],
-        [  1.0000]], dtype=torch.float64)
-d: tensor([28.7070], dtype=torch.float64)
-loss: 7957.0
--------------iter: 9-----------------
-p2: tensor([[730.7672],
-        [132.2697],
-        [  1.0000]], dtype=torch.float64)
-d: tensor([28.6998], dtype=torch.float64)
-loss: 7957.0
-
 ```
 
 Yes, you can see the optimizer found the global optimal at 3rd iteration:
