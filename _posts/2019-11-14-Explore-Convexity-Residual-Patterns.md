@@ -82,3 +82,35 @@ However, if we change the radius of random pattern, the error manifold will have
 ![error_manifold_different_rand_size.png]({{site.baseurl}}/images/error_manifold_different_rand_size.png)
 
 This figure shows that with the increased size of random sample pattern, the error is not getting more and more convex, rather this convexity is decreased and then increased, and eventually, as the sample radius increase, corrupt (become noisy), and contribute no effect on bundle adjustment optimization.
+
+We can see that in this local region, the best random pattern size is 6, with enough convexity yet still keep the stability.
+
+One key question is how do you evaluate the `convexity`?
+
+Nice question! We do it by calculate hessian of the manifold, and do distance voting:
+
+$$c(I) = \sum_{i \in I}{\frac{(I_{xx}I_{yy} - I_{xy}I_{yx})[i]}{d(I_i, I_\theta)}}$$
+
+Since our patch is centered by the reprojected point, so our distance to the reprojected point is a key concept to constrain the convex manifold to closer to our initial optimization point. By doing this, we can make sure that the error will go monotune while it's adjusted along the epipolar line.
+
+Note that we calcualte the hessian of error image, to avoid the numerical error, we have to smooth the error manifold:
+
+![error_manifold_smooth.png]({{site.baseurl}}/images/error_manifold_smooth.png)
+
+Actualy we can directly use the determinant of hessian matrix in each pixel to see if this local region is convex, simple check if they are greater than zero, to see if the error hessian is positive definite, then we can say this plane is convex or not.
+
+This is the hessian map of random pattern with radius size 6.
+
+![hessian_error_manifold_smooth.png]({{site.baseurl}}/images/hessian_error_manifold_smooth.png)
+
+This is the hessian map of DSO's residual pattern.
+
+![hessian_error_residual_pattern.png]({{site.baseurl}}/images/hessian_error_residual_pattern.png)
+
+This is the hessian map of random pattern with radius size 10.
+
+![hessian_error_large_rand.png]({{site.baseurl}}/images/hessian_error_large_rand.png)
+
+A more qualitative comparison is as following:
+
+![hessian_error_comparison.png]({{site.baseurl}}/images/hessian_error_comparison.png)
