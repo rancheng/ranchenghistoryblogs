@@ -44,5 +44,5 @@ float hw = fabs(residual) < setting_huberTH ? 1 : setting_huberTH / fabs(residua
 // energy is the huber normalized residual.
 energy += hw * residual * residual * (2 - hw);
 ```
-Here the residual is single pixel's intensity error after exposure affine correction, the `r2new_aff[0]` is thus \(\frac{t_je^{a_j}}{t_ie^{a_i}}\) and `r2new_aff[1]` is \(b_i - b_j\). The affine variables \(a_i\), \(a_j\), \(b_i\), \(b_i\) are jointly optimized in the estimation of the camera pose step. That's why the DSO's hessian block is 8x8, since they have 8 dimensional residuals, 6 DoF pose plus 2 affine models (8x(6+2)).
+Here the residual is single pixel's intensity error after exposure affine correction, the `r2new_aff[0]` is thus \( \frac{t_je^{a_j}}{t_ie^{a_i}} \) and `r2new_aff[1]` is \(b_i - b_j\). The affine variables \(a_i\), \(a_j\), \(b_i\), \(b_i\) are jointly optimized in the estimation of the camera pose step. That's why the DSO's hessian block is 8x8, since they have 8 dimensional residuals, 6 DoF pose plus 2 affine models (8x(6+2)).
 
