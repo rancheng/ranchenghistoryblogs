@@ -8,9 +8,9 @@ Several publications on robotics and learning. (Due to copyright issues, some pa
 
 #### Conference Papers
 
-**[CVPR 2020]** _Deep Monocular Visual Odometry with Direct Method_, **R. Cheng**, G. Dudek, D. Meger.  (preprint)
+**[ARXIV 2020]** _Deep Monocular Visual Odometry with Direct Method_, **R. Cheng**, G. Dudek, D. Meger.  (preprint)
 
-**[CORL 2019]** _Abstraction Augmentation for Deep Reinforcement Learning_, **R. Cheng**, G. Dudek, D. Meger.  [paper]({{ site.baseurl }}/docs/CoRL2019(1).pdf)
+**[ARXIV 2019]** _Abstraction Augmentation for Deep Reinforcement Learning_, **R. Cheng**, G. Dudek, D. Meger.  [paper]({{ site.baseurl }}/docs/CoRL2019(1).pdf)
 
 **[IROS 2018]** _Vision-Based Autonomous Underwater Swimming in Dense Coral for Combined Collision Avoidance and Target Selection_, T. Manderson, J. Higuera, **R. Cheng**, G. Dudek.  [paper](https://ieeexplore.ieee.org/document/8594410)
 
